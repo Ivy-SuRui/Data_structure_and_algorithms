@@ -1,7 +1,0 @@
-### Sequence Interface (L02, L07)
-
-| Data Structure  | get_at(i) | set_at(i, x) | insert_first(x) | insert_last(x) | insert_at(i, x) | delete_first() | delete_last() | delete_at(i) | Real-Life Example                         | Why Use It                                                                                   |
-|-----------------|-----------|---------------|------------------|----------------|------------------|----------------|----------------|----------------|-------------------------------------------|----------------------------------------------------------------------------------------------|
-| **Array**       | 1         | 1             | n                | n              | n                | n              | n              | n              | Game board (e.g., chess, sudoku)          | Use when the **size is fixed** and **fast access** is needed; memory layout is predictable.  |
-| **Linked List** | n         | n             | 1                | n              | n                | 1              | n              | n              | Undo/Redo buffer, browser history         | Use when **frequent insert/delete at front or middle**; don’t need fast indexing.            |
-| **Dynamic Array**| 1        | 1             | n                | 1 (amortized)  | n                | n              | 1 (amortized)  | n              | Search history, dynamic lists in apps     | Use when **list size changes often**; fast average-case appends, auto-resizing saves effort. |
