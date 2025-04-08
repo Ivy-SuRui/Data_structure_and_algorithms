@@ -9,6 +9,19 @@
 | **AVL Tree (augmented)**  | O(log n)    | O(log n)       | O(log n)           | O(log n)         | O(log n)           | O(log n)         | O(log n)         | O(log n)       | Ranked search results, collaborative editors     | Augmented for **fast positional access and modification**, always **balanced**               |
 | **Queue**                 | O(n)        | O(n)           | O(n)               | O(1)             | O(n)               | O(1)             | O(n)             | O(n)           | Print queues, BFS, task scheduling               | Use for **First-In-First-Out (FIFO)** tasks — great for traversal, buffering, job handling   |
 
+
+
+### Priority Queue Interface (Subset of Set Interface)
+
+| Data Structure          | `build(A)` | `insert(x)` | `delete_min()` | `delete_max()` | Time Complexity | In-place? | Sorting Algorithm | Use Case Example                               | Why Use It                                                                 |
+|-------------------------|------------|-------------|----------------|----------------|------------------|-----------|--------------------|------------------------------------------------|-----------------------------------------------------------------------------|
+| **Dynamic Array**        | O(n)       | O(1)        | O(n)           | O(n)           | O(n²)            | Yes       | Selection Sort      | Simple scheduler, toy priority queues           | Easy to implement, but inefficient for large or frequently changing datasets. |
+| **Sorted Dynamic Array** | O(n log n) | O(1)        | O(n)           | O(n)           | O(n²)            | Yes       | Insertion Sort      | Task queue with predefined priorities           | Fast access to min/max if array is kept sorted; insert/delete are expensive. |
+| **Set AVL Tree**         | O(n log n) | O(log n)    | O(log n)       | O(log n)       | O(n log n)       | No        | AVL Sort            | Real-time event system, live scoreboards        | Keeps elements always ordered; supports efficient priority operations.        |
+| **Binary Heap**   | O(n)       | O(log n)    | O(log n)       | O(log n)       | O(n log n)       | Yes       | Heap Sort           | CPU task scheduling, pathfinding (e.g. A*)      | Optimal balance of speed and memory for most priority queue use cases.       |
+
+
+
 ### Set Interface
 
 | Data Structure         | `build(A)`     | `find(k)`      | `insert(x)`     | `delete(k)`     | `find_min()`   | `find_max()`   | `find_prev(k)` | `find_next(k)` | Real-Life Example                              | Why Use It                                                                                      |
@@ -43,19 +56,13 @@
 | Hybrid (Merge + Insertion)| **TimSort**       | Uses Insertion Sort on small runs and Merge Sort to combine them        | Best: O(n), Avg: O(n log n), Worst: O(n log n)   | O(n)                 | Yes         | No             | Python/Java default sort, real-world large datasets              | Very practical hybrid sort optimized for real-world patterns                    |
 
 
-### Priority Queue Interface (Subset of Set Interface)
 
-| Data Structure          | `build(A)` | `insert(x)` | `delete_min()` | `delete_max()` | Time Complexity | In-place? | Sorting Algorithm | Use Case Example                               | Why Use It                                                                 |
-|-------------------------|------------|-------------|----------------|----------------|------------------|-----------|--------------------|------------------------------------------------|-----------------------------------------------------------------------------|
-| **Dynamic Array**        | O(n)       | O(1)        | O(n)           | O(n)           | O(n²)            | Yes       | Selection Sort      | Simple scheduler, toy priority queues           | Easy to implement, but inefficient for large or frequently changing datasets. |
-| **Sorted Dynamic Array** | O(n log n) | O(1)        | O(n)           | O(n)           | O(n²)            | Yes       | Insertion Sort      | Task queue with predefined priorities           | Fast access to min/max if array is kept sorted; insert/delete are expensive. |
-| **Set AVL Tree**         | O(n log n) | O(log n)    | O(log n)       | O(log n)       | O(n log n)       | No        | AVL Sort            | Real-time event system, live scoreboards        | Keeps elements always ordered; supports efficient priority operations.        |
-| **Binary Heap**   | O(n)       | O(log n)    | O(log n)       | O(log n)       | O(n log n)       | Yes       | Heap Sort           | CPU task scheduling, pathfinding (e.g. A*)      | Optimal balance of speed and memory for most priority queue use cases.       |
+### Graph Traversal & Shortest Path Algorithms
 
-
-### Traversal Algorithms Interface 
-
-| **Algorithm**           | **Data Structures Used**             | **Time Complexity** | **Space Complexity** | **Traversal Order**        | **Real-Life Example**                                     | **Why Use It**                                                                 |
-|-------------------------|--------------------------------------|---------------------|----------------------|----------------------------|------------------------------------------------------------|----------------------------------------------------------------------------------|
-| **Breadth-First Search (BFS)** | Queue, Visited Set, Adjacency List   | O(V + E)            | O(V)                 | Level-by-level (FIFO)      | Shortest path in unweighted maps (e.g., maze, grid), social network friend suggestion, web crawlers | Guarantees shortest path in unweighted graphs; excellent for proximity-based search |
-| **Depth-First Search (DFS)**   | Stack (recursion or explicit), Visited Set, Adjacency List | O(V + E)            | O(V)                 | As-deep-as-possible (LIFO) | Puzzle solving (Sudoku, N-Queens), cycle detection, maze generation, topological sort | Great for backtracking, exploring all configurations, or hierarchy-based traversal |
+| **Algorithm**             | **Graph Type** | **Edge Weights** | **Data Structures Used**                     | **Time Complexity**       | **Space Complexity** | **Traversal Order / Method**      | **Real-Life Example**                                           | **Why Use It**                                                                 |
+|---------------------------|----------------|------------------|----------------------------------------------|----------------------------|----------------------|------------------------------------|------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| **Breadth-First Search (BFS)** | General        | Unweighted       | Queue, Visited Set, Adjacency List           | O(V + E)                   | O(V)                 | Level-by-level (FIFO)              | Finding shortest path in an unweighted maze or grid            | Best for finding the minimum number of steps when all moves are equal cost       |
+| **Depth-First Search (DFS)**   | General        | Unweighted       | Stack (recursion or explicit), Visited Set   | O(V + E)                   | O(V)                 | As-deep-as-possible (LIFO)         | Exploring a file system, solving a maze where all moves are equal | Great for exhaustive search, pathfinding, cycle detection, or puzzle solving     |
+| **DAG Relaxation**             | DAG            | Any              | Topological sort + Relaxation                | O(V + E)                   | Depends              | Process in topological order       | Project scheduling with dependencies and different task durations | Ideal for shortest path in task planning, course prerequisites, or job workflows |
+| **Bellman-Ford**               | General        | Any              | Edge list, distance array                    | O(V · E)                   | O(V)                 | Relax all edges V - 1 times        | Currency arbitrage detection, planning with possible penalties or debts | Works even with negative weights or when cost can reduce due to discounts or rewards |
+| **Dijkstra**                   | General        | Non-negative     | Priority Queue (Heap), distance array        | O(V log V + E)             | O(V + E)             | Greedy expansion from source       | GPS navigation, delivery routing, internet packet routing       | Efficient and accurate for shortest-cost path when all edges have non-negative cost |
